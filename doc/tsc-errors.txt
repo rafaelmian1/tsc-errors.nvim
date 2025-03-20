@@ -1,0 +1,74 @@
+*tsc-errors.txt*  TypeScript compiler errors in quickfix list
+
+==============================================================================
+CONTENTS                                                  *tsc-errors-contents*
+
+    1. Introduction ........................... |tsc-errors-introduction|
+    2. Usage .................................. |tsc-errors-usage|
+    3. Commands ............................... |tsc-errors-commands|
+    4. Configuration .......................... |tsc-errors-configuration|
+    5. API .................................... |tsc-errors-api|
+    6. License ................................ |tsc-errors-license|
+
+==============================================================================
+1. Introduction                                        *tsc-errors-introduction*
+
+tsc-errors.nvim is a lightweight Neovim plugin that runs the TypeScript
+compiler and populates the quickfix list with any errors found, making it easy
+to navigate and fix TypeScript errors in your project.
+
+==============================================================================
+2. Usage                                                    *tsc-errors-usage*
+
+After installation, you can use the |:TSCErrors| command to check for
+TypeScript errors in your project. If errors are found, they will be displayed
+in the quickfix list, which you can navigate using standard quickfix commands.
+
+You can map the command to a key for quicker access:
+>
+    vim.keymap.set('n', '<leader>tsc', ':TSCErrors<CR>', { silent = true })
+<
+
+The plugin works out of the box with no configuration needed.
+
+==============================================================================
+3. Commands                                              *tsc-errors-commands*
+
+*:TSCErrors*                  Run TypeScript compiler and populate the quickfix
+                            list with any errors found. Displays a notification
+                            with the number of errors found or that no errors
+                            were found.
+
+==============================================================================
+4. Configuration                                    *tsc-errors-configuration*
+
+The plugin works without configuration, but you can customize its behavior by
+calling the setup function:
+>
+    require("tsc-errors").setup({
+      -- Options with their default values
+      key = "<leader>tsce",                       -- Custom keybinding
+      qf_preview = function() vim.cmd("copen") end, -- Function to open quickfix
+      tsc_cmd = "npx tsc --noEmit",               -- TSC command
+      qf_title = "TSC compile errors"             -- Quickfix list title
+    })
+<
+
+==============================================================================
+5. API                                                        *tsc-errors-api*
+
+*tsc_quickfix()*             Run TypeScript compiler, populate the quickfix
+                            list with errors, and display them if any are
+                            found.
+>
+    require("tsc-errors").tsc_quickfix()
+<
+
+==============================================================================
+6. License                                               *tsc-errors-license*
+
+MIT License
+
+Copyright (c) 2025 Rafael Mian
+
+vim:tw=78:ts=8:ft=help:norl:
